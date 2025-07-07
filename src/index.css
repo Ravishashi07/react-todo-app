@@ -1,0 +1,411 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&display=swap");
+
+* {
+  font-family: "Press Start 2P", "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #1a1a1a;
+  --aqua-primary: #00ffff;
+  --aqua-secondary: #00d4ff;
+  --aqua-dark: #008b8b;
+  --text-primary: #ffffff;
+  --text-secondary: #888888;
+  --border: #333333;
+  --shadow-neon: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+body {
+  font-family: "Press Start 2P", sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(0, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 32px;
+  position: relative;
+}
+
+header {
+  display: flex;
+  align-items: stretch;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 16px;
+  animation: slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+header input {
+  width: 100%;
+  padding: 20px 24px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 400;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  outline: none;
+  position: relative;
+}
+header input::placeholder {
+  color: var(--text-secondary);
+}
+header input:focus {
+  border-color: var(--aqua-primary);
+  background: var(--bg-secondary);
+}
+header button {
+  padding: 20px 32px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+header button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+header button:hover {
+  border-color: var(--aqua-primary);
+  color: var(--aqua-primary);
+  box-shadow: var(--shadow-neon);
+  animation: rotate 0.5s linear;
+}
+header button:hover::before {
+  left: 100%;
+}
+@keyframes rotate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  33% {
+    transform: rotate(5deg);
+  }
+  66% {
+    transform: rotate(-5deg);
+  }
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+.todoItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  animation: slideUp 0.6s ease;
+  transition: all 0.6s ease;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.todoItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height:2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--aqua-primary),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+.todoItem:hover {
+  background: var(--bg-secondary);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), var(--shadow-neon);
+}
+.todoItem:hover::before {
+  animation: move 1s ease infinite;
+  left: 100%;
+}
+@keyframes move {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateX(200px);
+  transition: all 0.3s ease;
+}
+.todoItem:hover .actionsContainer {
+  opacity: 1;
+  transform: translateX(0);
+}
+.actionsContainer button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+}
+.actionsContainer button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+.actionsContainer button:hover {
+  border-color: var(--aqua-primary);
+  color: var(--aqua-primary);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  transform: scale(1.05) rotate(5deg);
+  animation: bounce 0.6s ease;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1.15) rotate(5deg);
+  }
+  50% {
+    transform: scale(1.25) rotate(-5deg);
+  }
+}
+.actionsContainer button:hover::before {
+  left: 100%;
+}
+.checkboxAndText {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.todo-checkbox {
+  height: 18px;
+  width: 18px;
+  accent-color: var(--aqua-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.todo-checkbox:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+.todo-checkbox:checked ~ .todo-text {
+  text-decoration: line-through var(--aqua-primary) 2px;
+  color: var(--aqua-primary);
+  opacity: 0.7;
+  transition: all 0.4s ease;
+  animation: checkComplete 0.6s ease;
+}
+
+@keyframes checkComplete {
+  0% {
+    transform: scale(0.85);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--aqua-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aqua-primary);
+}
+@media (max-width: 768px) {
+  #root {
+    padding: 16px;
+    gap: 24px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  header input {
+    padding: 16px 20px;
+    font-size: 14px;
+  }
+
+  header button {
+    padding: 16px 24px;
+    font-size: 12px;
+  }
+
+  .todoItem {
+    padding: 16px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .checkboxAndText {
+    width: 100%;
+  }
+
+  .actionsContainer {
+    opacity: 1;
+    transform: translateX(0);
+    align-self: flex-end;
+  }
+
+  .todoItem:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  body::before {
+    background-size: 30px 30px;
+  }
+
+  #root {
+    padding: 12px;
+    gap: 16px;
+  }
+
+  header input {
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+
+  header button {
+    padding: 14px 20px;
+    font-size: 10px;
+  }
+
+  .todoItem {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .actionsContainer button {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+}
